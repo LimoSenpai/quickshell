@@ -1,6 +1,17 @@
-// AUTO-GENERATED FROM wallust Fr 11. Jul 07:50:44 CEST 2025
-export const background = "#1C1920";
-export const surface = "#433F48";
-export const foreground = "#EFF7FD";
-export const accent = "#73AAEB";
-export const alert = "#618DC7";
+// AUTO-GENERATED COLORS
+
+var background = "#0C0F10";
+var surface = "#373A3B";
+var foreground = "#B7FDFD";
+var accent = "#71BDFE";
+var alert = "#DE4D2F";
+
+function getColors() {
+    return {
+        background: background,
+        surface: surface,
+        foreground: foreground,
+        accent: accent,
+        alert: alert,
+    };
+}

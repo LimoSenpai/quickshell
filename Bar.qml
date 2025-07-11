@@ -11,7 +11,7 @@ Variants {
     // the screen from the screens list will be injected into this
     // property
     property var modelData
-
+    color: C.background
     // we can then set the window's screen to the injected property
     screen: modelData
 
@@ -25,6 +25,7 @@ Variants {
 
         ClockWidget {
             anchors.centerIn: parent
+            color: C.foreground
         }
     
     }
