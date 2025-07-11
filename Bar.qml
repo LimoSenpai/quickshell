@@ -1,5 +1,6 @@
 import Quickshell // for PanelWindow
-import QtQuick // for Text
+import QtQuick // for Text, basic QML types
+import QtQuick.Layouts 1.3 // for RowLayout
 import Quickshell.Io // for Process
 import "./js/colors.js" as C
 
@@ -21,13 +22,14 @@ Variants {
         right: true
     }
 
-    implicitHeight: 30
-
-        ClockWidget {
-            anchors.centerIn: parent
-            color: C.foreground
-        }
-    
+    implicitHeight: 40
+      WorkspaceIndicator {
+          height: parent.height
+      }
+      ClockWidget {
+          anchors.centerIn: parent
+          color: C.foreground
+      }
     }
   }
 }
