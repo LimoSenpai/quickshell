@@ -1,6 +1,7 @@
 import Quickshell // for PanelWindow
 import QtQuick // for Text
 import Quickshell.Io // for Process
+import "./js/colors.js" as C
 
 Variants {
   model: Quickshell.screens;
@@ -21,7 +22,7 @@ Variants {
     }
 
     implicitHeight: 30
-    
+
         ClockWidget {
             anchors.centerIn: parent
         }

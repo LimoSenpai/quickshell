@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 
-if [ -z "$1" ]; then
-  echo "Usage: $0 /path/to/wallpaper.jpg"
-  exit 1
-fi
-
 wall="$1"
 base="$HOME/.config/quickshell"
 scss="$base/scss/colors.scss"
 js="$base/js/colors.js"
+template="$base/templates/colors-quickshell.conf"
 
-# Set wallpaper
+# Check if wall exists
+[[ -f "$wall" ]] || { echo "❌ Wallpaper not found: $wall"; exit 1; }
+
+# Set wallpaper with swww
 swww img "$wall"
 
-# Extract colors to SCSS
-wallust run "$wall" --template "$base/templates/colors-quickshell.conf" > "$scss"
+# Run wallust with your template to generate SCSS
+wallust run "$wall"
 
-# Convert SCSS to JS color constants
-{
-  echo "// AUTO-GENERATED COLORS FROM WALLUST"
-  grep -Po '@define-color\s+\K\w+' "$scss" | while read -r name; do
-    col=$(grep -Po "@define-color\s+$name\s+#\K[0-9A-Fa-f]{6}" "$scss")
-    echo "export const $name = \"#$col\";"
-  done
-} > "$js"
+# Convert colors.scss to colors.js for QML use
+echo "// AUTO-GENERATED FROM wallust $(date)" > "$js"
 
-echo "Theme updated from $wall"
+grep '@define-color' "$scss" | while read -r line; do
+    name=$(echo "$line" | awk '{print $2}')
+    hex=$(echo "$line" | grep -oE '#[0-9a-fA-F]{6}')
+    echo "export const $name = \"$hex\";" >> "$js"
+done
+
+
+echo "✅ Wallpaper and theme applied from: $wall"
